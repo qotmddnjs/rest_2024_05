@@ -18,10 +18,10 @@ public class MemberService {
 
     public Member join(String username, String password, String email) {
         Member member = Member.builder()
-                .username(username)
-                .password(password)
-                .email(email)
-                .build();
+            .username(username)
+            .password(password)
+            .email(email)
+            .build();
 
         memberRepository.save(member);
 
@@ -42,5 +42,9 @@ public class MemberService {
         }
 
         return jwtProvider.genToken(member.toClaims(), 60 * 60 * 24 * 365);
+    }
+
+    public Optional<Member> findById(long id) {
+        return memberRepository.findById(id);
     }
 }
